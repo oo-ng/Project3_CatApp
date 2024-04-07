@@ -10,24 +10,24 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/SpinnerFragmentContainer"
         android:name="com.example.project3.SpinnerFragment"
-        android:layout_width="384dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="195dp"
-        android:layout_marginEnd="216dp"
+        android:layout_width="407dp"
+        android:layout_height="240dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.028" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/InfoFragmentContainer"
+        android:id="@+id/InfoFragmentContainerView"
         android:name="com.example.project3.InfoFragment"
-        android:layout_width="403dp"
-        android:layout_height="633dp"
+        android:layout_width="406dp"
+        android:layout_height="451dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SpinnerFragmentContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerFragmentContainer"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
