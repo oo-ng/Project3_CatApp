@@ -40,9 +40,10 @@ class InfoFragment : Fragment() {
                         "Cat Temperament: ${selectedCat.temperament}\n" +
                         "Cat Description: ${selectedCat.description}"
 
-//            Glide.with(requireContext())
-//                .load("  https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=beng${selectedCat.id}" +"&api_key=live_WI89Y6HP6gN1kQjAOgrpL4mzOP8zEW9T1WQfbfP0PK43xRkZMUdzCvpfUzCFJW83")
-//                .into(binding.catImageView)
+            // Using Glide to load the image of the cat into our catImageView
+            Glide.with(requireContext())
+                .load(selectedCat.imageUrl) // the imageUrl is saved in each cat json response
+                .into(binding.catImageView)
         }
     }
 

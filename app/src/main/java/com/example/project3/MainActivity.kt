@@ -68,7 +68,12 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
                 val temperament = catObject.getString("temperament")
                 val origin = catObject.getString("origin")
                 val description = catObject.getString("description")
-                catList.add(Cat(id, name, temperament,origin, description ))
+                // adding a way to get image url
+                val imageUrl = if (catObject.has("image")) {catObject.getJSONObject("image").getString("url")} else {
+                    ""
+                }
+                // Added imageUrl to the list
+                catList.add(Cat(id, name, temperament,origin, description, imageUrl ))
                 }
                 viewModel.updateCatList(catList)
             },
