@@ -30,11 +30,10 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
         requestQueue = Volley.newRequestQueue(this)
         viewModel= ViewModelProvider(this).get(SharedViewModel::class.java)
 
-        getCatData() // testing to see if we get any info
-            // after checking logCat - I se it got all the names and descriptions
-            // this code was following the Student-Guide-VolleyInKotlin he posted for us
+        getCatData() // calling api to get cat data
     }
 
+    // Can we delete this? @onBreedSelected
     override fun onBreedSelected(breedName: String) {
         TODO("Not yet implemented")
     }
@@ -50,9 +49,6 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
             .replace(R.id.SpinnerFragmentConstraintLayout, spinnerFragment)
             .commit()
     }
-
-
-
 
     fun getCatData(){
         val catList = ArrayList<Cat>()
