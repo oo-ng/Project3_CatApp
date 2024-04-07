@@ -35,7 +35,7 @@ class InfoFragment : Fragment() {
         viewModel.selectedCat.observe(viewLifecycleOwner){
                 selectedCat->
             binding.ConciseTextView.text =
-                "CatName: ${selectedCat.name}\n" +
+                "Cat Name: ${selectedCat.name}\n" +
                         "Cat Origin: ${selectedCat.origin}\n" +
                         "Cat Temperament: ${selectedCat.temperament}\n" +
                         "Cat Description: ${selectedCat.description}"
