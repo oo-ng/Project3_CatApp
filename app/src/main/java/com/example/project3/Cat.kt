@@ -1,6 +1,6 @@
 package com.example.project3
 
-class Cat(id:String, name: String, temperament: String, origin: String, description: String) {
+class Cat(id:String, name: String, temperament: String, origin: String, description: String, imageUrl : String) {
     var id: String = id
         get() = field
         set(value) {
@@ -25,6 +25,14 @@ class Cat(id:String, name: String, temperament: String, origin: String, descript
         }
 
     var description: String = description
+        get() = field
+        set(value) {
+            field = value
+        }
+
+    // adding a way to store the image url from the json info
+
+    var imageUrl : String = imageUrl
         get() = field
         set(value) {
             field = value
