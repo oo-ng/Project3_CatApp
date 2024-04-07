@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -20,12 +21,14 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListener {
     private lateinit var binding : ActivityMainBinding
     lateinit var requestQueue: RequestQueue
+    private lateinit var viewModel: SharedViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         requestQueue = Volley.newRequestQueue(this)
+        viewModel= ViewModelProvider(this).get(SharedViewModel::class.java)
 
         getCatData() // testing to see if we get any info
             // after checking logCat - I se it got all the names and descriptions
@@ -48,17 +51,7 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
             .commit()
     }
 
-    private fun passDataToInfoFragment(catList: ArrayList<Cat>) {
-        val InfoFragment = InfoFragment().apply {
-            arguments = Bundle().apply {
-                putSerializable("catList", catList)
-            }
-        }
-        // Now, replace/add this fragment to your container
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.InfoFragmentContainerView, InfoFragment)
-            .commit()
-    }
+
 
 
     fun getCatData(){
@@ -67,15 +60,17 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
 
         val JsonArrayRequest  = JsonArrayRequest (Request.Method.GET, catURL, null,
             { response ->
+                Log.d("MainActivityDATA", "JSON Response: $response")
             for (i in 0 until response.length()) {
                 val catObject = response.getJSONObject(i)
+                val id = catObject.getString("id")
                 val name = catObject.getString("name")
                 val temperament = catObject.getString("temperament")
                 val origin = catObject.getString("origin")
-                val otherInfo = catObject.getString("name")
-                catList.add(Cat(name, temperament,origin, otherInfo ))
+                val description = catObject.getString("description")
+                catList.add(Cat(id, name, temperament,origin, description ))
                 }
-                passDataToSpinnerFragment(catList)
+                viewModel.updateCatList(catList)
             },
             {error->
                 Log.i("MainActivity", "Error fetching cat data: ${error.message}")

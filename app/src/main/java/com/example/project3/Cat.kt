@@ -1,6 +1,11 @@
 package com.example.project3
 
-class Cat(name: String, temperament: String, origin: String, otherInfo: String) {
+class Cat(id:String, name: String, temperament: String, origin: String, description: String) {
+    var id: String = id
+        get() = field
+        set(value) {
+            field = value
+        }
     var name: String = name
         get() = field
         set(value) {
@@ -19,7 +24,7 @@ class Cat(name: String, temperament: String, origin: String, otherInfo: String) 
             field = value
         }
 
-    var otherInfo: String = otherInfo
+    var description: String = description
         get() = field
         set(value) {
             field = value
