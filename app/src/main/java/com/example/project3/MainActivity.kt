@@ -43,12 +43,14 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
 //    } // end of passDataToSpinnerFragment
 
     fun getCatData(){
-        val catList = ArrayList<Cat>()
+        val catList = ArrayList<Cat>() // initializing an ArrayList to hold Cat objects
         val catURL = "https://api.thecatapi.com/v1/breeds" + "?api_key=live_WI89Y6HP6gN1kQjAOgrpL4mzOP8zEW9T1WQfbfP0PK43xRkZMUdzCvpfUzCFJW83"
 
+        // Requesting JSON array from the catURL
         val JsonArrayRequest  = JsonArrayRequest (Request.Method.GET, catURL, null,
             { response ->
-                Log.d("MainActivityDATA", "JSON Response: $response")
+                Log.d("MainActivityDATA", "JSON Response: $response") // logging response
+                // Iterating thru the json response storing info from the JSON object
             for (i in 0 until response.length()) {
                 val catObject = response.getJSONObject(i)
                 val id = catObject.getString("id")
@@ -56,7 +58,7 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
                 val temperament = catObject.getString("temperament")
                 val origin = catObject.getString("origin")
                 val description = catObject.getString("description")
-                // adding a way to get image url
+                // storing image url to be used to load image of cat in an image view
                 val imageUrl = if (catObject.has("image")) {catObject.getJSONObject("image").getString("url")} else {
                     "No picture of the cat"
                 }
