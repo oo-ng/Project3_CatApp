@@ -4,19 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.project3.databinding.ActivityMainBinding
-import org.json.JSONArray
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListener {
     private lateinit var binding : ActivityMainBinding
@@ -33,26 +26,25 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
         getCatData() // calling api to get cat data
     }
 
-    // Can we delete this? @onBreedSelected
     override fun onBreedSelected(breedName: String) {
-        TODO("Not yet implemented")
     }
 
-    private fun passDataToSpinnerFragment(catList: ArrayList<Cat>) {
-        val spinnerFragment = SpinnerFragment().apply {
-            arguments = Bundle().apply {
-                putSerializable("catList", catList)
-            }
-        }
-        // Now, replace/add this fragment to your container
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.SpinnerFragmentConstraintLayout, spinnerFragment)
-            .commit()
-    }
+    // commenting this out, I don't believe we need it, waiting for a response to delete it fully
+//    private fun passDataToSpinnerFragment(catList: ArrayList<Cat>) {
+//        val spinnerFragment = SpinnerFragment().apply {
+//            arguments = Bundle().apply {
+//                putSerializable("catList", catList)
+//            }
+//        }
+//        // Now, replace/add this fragment to your container
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.SpinnerFragmentConstraintLayout, spinnerFragment)
+//            .commit()
+//    } // end of passDataToSpinnerFragment
 
     fun getCatData(){
         val catList = ArrayList<Cat>()
-        var catURL = "https://api.thecatapi.com/v1/breeds" + "?api_key=live_WI89Y6HP6gN1kQjAOgrpL4mzOP8zEW9T1WQfbfP0PK43xRkZMUdzCvpfUzCFJW83"
+        val catURL = "https://api.thecatapi.com/v1/breeds" + "?api_key=live_WI89Y6HP6gN1kQjAOgrpL4mzOP8zEW9T1WQfbfP0PK43xRkZMUdzCvpfUzCFJW83"
 
         val JsonArrayRequest  = JsonArrayRequest (Request.Method.GET, catURL, null,
             { response ->
@@ -68,8 +60,8 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
                 val imageUrl = if (catObject.has("image")) {catObject.getJSONObject("image").getString("url")} else {
                     "No picture of the cat"
                 }
-                // Added imageUrl to the list
-                catList.add(Cat(id, name, temperament,origin, description, imageUrl ))
+                // Stores json values we want saved into our catList
+                catList.add(Cat(id, name, temperament, origin, description, imageUrl ))
                 }
                 viewModel.updateCatList(catList)
             },

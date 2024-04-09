@@ -1,5 +1,15 @@
 package com.example.project3
 
+/*
+    Cat class contains:
+        name : String
+        temperament : String
+        origin : String
+        description : String
+        imageUrl : String
+    All of these are holding values from our json response from the API call, storing info on each cat
+ */
+
 class Cat(id:String, name: String, temperament: String, origin: String, description: String, imageUrl : String) {
     var id: String = id
         get() = field
