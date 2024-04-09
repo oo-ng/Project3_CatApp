@@ -19,7 +19,7 @@ class InfoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel= ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-    }
+    } // end of onCreate
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +29,7 @@ class InfoFragment : Fragment() {
         return binding.root
     }
 
+    // When the view is created we want to set our textview and our image view with the current selected cat from the API
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,11 +45,11 @@ class InfoFragment : Fragment() {
             Glide.with(requireContext())
                 .load(selectedCat.imageUrl) // the imageUrl is saved in each cat json response
                 .into(binding.catImageView)
-        }
-    }
+        } // end of our observe method
+    } // end of onViewCreated
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null // Avoid memory leaks
-    }
+    } // end of onDestroyView
 }
