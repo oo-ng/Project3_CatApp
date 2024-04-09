@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
                 val description = catObject.getString("description")
                 // adding a way to get image url
                 val imageUrl = if (catObject.has("image")) {catObject.getJSONObject("image").getString("url")} else {
-                    ""
+                    "No picture of the cat"
                 }
                 // Added imageUrl to the list
                 catList.add(Cat(id, name, temperament,origin, description, imageUrl ))
@@ -77,5 +77,5 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
                 Log.i("MainActivity", "Error fetching cat data: ${error.message}")
         })
         requestQueue.add(JsonArrayRequest)
-    }
+    } // end of getCatData
 }

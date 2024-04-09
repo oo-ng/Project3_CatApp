@@ -1,6 +1,5 @@
 package com.example.project3
 
-import android.R
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,7 +21,7 @@ class SpinnerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel= ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-    }
+    } // end of onCreate
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,19 +63,11 @@ class SpinnerFragment : Fragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
-            }
-
+            } // end of onNothingSelected
         }
-
-    }
-
-
-
+    } // end of onViewCreated
 
     interface OnBreedSelectedListener {
         fun onBreedSelected(breedName: String)
     }
-
-
-
 }
