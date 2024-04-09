@@ -26,22 +26,7 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
         getCatData() // calling api to get cat data
     }
 
-    override fun onBreedSelected(breedName: String) {
-    }
-
-    // commenting this out, I don't believe we need it, waiting for a response to delete it fully
-//    private fun passDataToSpinnerFragment(catList: ArrayList<Cat>) {
-//        val spinnerFragment = SpinnerFragment().apply {
-//            arguments = Bundle().apply {
-//                putSerializable("catList", catList)
-//            }
-//        }
-//        // Now, replace/add this fragment to your container
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.SpinnerFragmentConstraintLayout, spinnerFragment)
-//            .commit()
-//    } // end of passDataToSpinnerFragment
-
+    // Function to get cat information from the cat API
     fun getCatData(){
         val catList = ArrayList<Cat>() // initializing an ArrayList to hold Cat objects
         val catURL = "https://api.thecatapi.com/v1/breeds" + "?api_key=live_WI89Y6HP6gN1kQjAOgrpL4mzOP8zEW9T1WQfbfP0PK43xRkZMUdzCvpfUzCFJW83"
@@ -72,4 +57,7 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
         })
         requestQueue.add(JsonArrayRequest)
     } // end of getCatData
+
+    override fun onBreedSelected(breedName: String) {
+    }
 }
