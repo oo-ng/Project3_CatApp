@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
     }
 
     // Function to get cat information from the cat API
-    fun getCatData(){
+    private fun getCatData(){
         val catList = ArrayList<Cat>() // initializing an ArrayList to hold Cat objects
         val catURL = "https://api.thecatapi.com/v1/breeds" + "?api_key=live_WI89Y6HP6gN1kQjAOgrpL4mzOP8zEW9T1WQfbfP0PK43xRkZMUdzCvpfUzCFJW83"
 
         // Requesting JSON array from the catURL
-        val JsonArrayRequest  = JsonArrayRequest (Request.Method.GET, catURL, null,
+        val jsonArrayRequest  = JsonArrayRequest (Request.Method.GET, catURL, null,
             { response ->
                 Log.d("MainActivityDATA", "JSON Response: $response") // logging response
                 // Iterating thru the json response storing info from the JSON object
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
                 val description = catObject.getString("description")
                 // storing image url to be used to load image of cat in an image view
                 val imageUrl = if (catObject.has("image")) {catObject.getJSONObject("image").getString("url")} else {
-                    "No picture of the cat"
+                    "https://i.pinimg.com/564x/b0/e6/5f/b0e65f2b910ae5cdb30f2551a819471f.jpg" // no cat image replacement, see European Burmese for example
                 }
                 // Stores json values we want saved into our catList
                 catList.add(Cat(id, name, temperament, origin, description, imageUrl ))
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), SpinnerFragment.OnBreedSelectedListene
             {error->
                 Log.i("MainActivity", "Error fetching cat data: ${error.message}")
         })
-        requestQueue.add(JsonArrayRequest)
+        requestQueue.add(jsonArrayRequest)
     } // end of getCatData
 
     override fun onBreedSelected(breedName: String) {
